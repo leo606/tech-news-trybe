@@ -1,6 +1,7 @@
 import time
 import requests
 from parsel import Selector
+from tech_news.classes.news_details import News_details
 
 
 # Requisito 1
@@ -37,7 +38,21 @@ def scrape_next_page_link(html_content):
 
 # Requisito 4
 def scrape_noticia(html_content):
-    """Seu código deve vir aqui"""
+    news_details = News_details(html_content)
+
+    return {
+        "writer": news_details.get_writer()
+    }
+
+
+# file_pixel = "tests/assets/tecmundo_pages/dispositivos-moveis|215327-pixel-5a-tera-lancamento-limitado-devido-escassez-chips.htm.html"
+# file_viloes = "tests/assets/tecmundo_pages/minha-serie|215168-10-viloes-animes-extremamente-inteligentes.htm.html"
+# file_seg = "tests/assets/tecmundo_pages/seguranca|215274-pmes-principais-alvos-ataques-ciberneticos.htm.html"
+
+# with open(file_viloes) as file:
+#     read_file = file.read()
+
+# scrape_noticia(read_file)
 
 
 # Requisito 5
