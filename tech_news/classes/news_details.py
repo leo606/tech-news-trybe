@@ -6,6 +6,9 @@ class News_details:
         self.html_content = html_content
         self.select = Selector(html_content)
 
+    def get_title(self):
+        return self.select.css("#js-article-title::text").get()
+
     def get_timestamp(self):
         return self.select.css("#js-article-date::attr(datetime)").get()
 
