@@ -1,4 +1,3 @@
-from pprint import pprint
 import time
 import requests
 from parsel import Selector
@@ -50,17 +49,8 @@ def scrape_noticia(html_content):
         "comments_count": news_details.get_comments_count(),
         "summary": news_details.get_summary(),
         "sources": news_details.get_sources(),
+        "categories": news_details.get_categories(),
     }
-
-
-file_pixel = "tests/assets/tecmundo_pages/dispositivos-moveis|215327-pixel-5a-tera-lancamento-limitado-devido-escassez-chips.htm.html"
-file_viloes = "tests/assets/tecmundo_pages/minha-serie|215168-10-viloes-animes-extremamente-inteligentes.htm.html"
-file_seg = "tests/assets/tecmundo_pages/seguranca|215274-pmes-principais-alvos-ataques-ciberneticos.htm.html"
-
-with open(file_pixel) as file:
-    read_file = file.read()
-
-pprint(scrape_noticia(read_file))
 
 
 # Requisito 5

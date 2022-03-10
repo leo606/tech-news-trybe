@@ -56,3 +56,7 @@ class News_details:
 
         if sources:
             return [*map(lambda src: src.strip(), sources)]
+
+    def get_categories(self):
+        categories = self.select.css("#js-categories a::text").getall()
+        return ([*map(lambda cat: cat.strip(), categories)])
