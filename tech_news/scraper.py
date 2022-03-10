@@ -1,14 +1,23 @@
 import time
 import requests
 from parsel import Selector
+from tech_news.database import create_news
 from tech_news.classes.news_details import News_details
+
+headers = dict(
+    {
+        "user-agent": "Mozilla/5.0 (X11; Linux x86_64)",
+        "User-Agent": "Mozilla/5.0 (X11; Linux x86_64)",
+        "accept": "text/html",
+    },
+)
 
 
 # Requisito 1
 def fetch(url):
     time.sleep(1)
     try:
-        response = requests.get(url, timeout=3)
+        response = requests.get(url, timeout=3, headers=headers)
         response.raise_for_status()
     except requests.ReadTimeout:
         return
@@ -55,4 +64,20 @@ def scrape_noticia(html_content):
 
 # Requisito 5
 def get_tech_news(amount):
-    """Seu código deve vir aqui"""
+    html_content = fetch("https://www.tecmundo.com.br/novidades")
+    news_urls = scrape_novidades(html_content)
+
+    while len(news_urls) < amount:
+        print("while")
+        new_page_url = scrape_next_page_link(html_content)
+        html_content = fetch(new_page_url)
+        news_urls = news_urls + scrape_novidades(html_content)
+
+    news_scraped_list = []
+    for news_url in news_urls[:amount]:
+        news_page_html_content = fetch(news_url)
+        news_scraped_data = scrape_noticia(news_page_html_content)
+        news_scraped_list.append(news_scraped_data)
+
+    create_news(news_scraped_list)
+    return news_scraped_list
