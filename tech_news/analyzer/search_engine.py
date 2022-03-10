@@ -31,7 +31,9 @@ def search_by_date(date):
 
 # Requisito 8
 def search_by_source(source):
-    """Seu código deve vir aqui"""
+    regex = re.compile(source, re.IGNORECASE)
+    list = db.news.find({"sources": {"$regex": regex}})
+    return [(item["title"], item["url"]) for item in list]
 
 
 # Requisito 9
