@@ -43,7 +43,7 @@ class News_details:
 
     def get_summary(self):
         summary = self.select.css(
-            ".tec--article__body p:first-child *::text"
+            ".tec--article__body > p:first-child *::text"
         ).getall()
         return "".join(summary)
 
