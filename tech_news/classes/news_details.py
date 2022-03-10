@@ -36,3 +36,9 @@ class News_details:
     def get_comments_count(self):
         comments = self.select.css(".comment-count::text").re_first(r"\d+")
         return int(comments) if comments else 0
+
+    def get_summary(self):
+        summary = self.select.css(
+            ".tec--article__body p:first-child *::text"
+        ).getall()
+        return "".join(summary)
