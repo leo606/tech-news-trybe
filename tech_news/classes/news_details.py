@@ -6,6 +6,9 @@ class News_details:
         self.html_content = html_content
         self.select = Selector(html_content)
 
+    def get_page_url(self):
+        return self.select.css("head link[rel='canonical']::attr(href)").get()
+
     def get_title(self):
         return self.select.css("#js-article-title::text").get()
 

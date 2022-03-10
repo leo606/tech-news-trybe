@@ -42,6 +42,7 @@ def scrape_noticia(html_content):
     news_details = News_details(html_content)
 
     return {
+        "url": news_details.get_page_url(),
         "title": news_details.get_title(),
         "timestamp": news_details.get_timestamp(),
         "writer": news_details.get_writer(),
