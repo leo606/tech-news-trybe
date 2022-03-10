@@ -42,3 +42,17 @@ class News_details:
             ".tec--article__body p:first-child *::text"
         ).getall()
         return "".join(summary)
+
+    def get_sources(self):
+        sources_title = self.select.css(
+            ".tec--article__body-grid > div:nth-last-child(2) h2::text"
+        ).get()
+        if not sources_title:
+            return []
+
+        sources = self.select.css(
+            ".tec--article__body-grid > div:nth-last-child(2) a::text"
+        ).getall()
+
+        if sources:
+            return [*map(lambda src: src.strip(), sources)]

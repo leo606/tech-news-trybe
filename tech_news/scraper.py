@@ -49,6 +49,7 @@ def scrape_noticia(html_content):
         "shares_count": news_details.get_shares_count(),
         "comments_count": news_details.get_comments_count(),
         "summary": news_details.get_summary(),
+        "sources": news_details.get_sources(),
     }
 
 
