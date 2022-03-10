@@ -1,5 +1,6 @@
 import re
 from tech_news.database import db
+from datetime import datetime, timedelta
 
 
 # Requisito 6
@@ -11,7 +12,21 @@ def search_by_title(title):
 
 # Requisito 7
 def search_by_date(date):
-    """Seu código deve vir aqui"""
+    try:
+        timestamp = datetime.fromisoformat(date)
+    except ValueError:
+        raise ValueError("Data inválida")
+
+    tomorrow = timestamp + timedelta(days=1)
+    list = db.news.find(
+        {
+            "timestamp": {
+                "$gte": timestamp.isoformat(),
+                "$lt": tomorrow.isoformat(),
+            }
+        }
+    )
+    return [(item["title"], item["url"]) for item in list]
 
 
 # Requisito 8
