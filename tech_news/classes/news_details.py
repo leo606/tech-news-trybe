@@ -35,6 +35,10 @@ class News_details:
 
     def get_comments_count(self):
         comments = self.select.css(".comment-count::text").re_first(r"\d+")
+        if not comments:
+            comments = self.select.css(
+                "#js-comments-btn::attr(data-count)"
+            ).get()
         return int(comments) if comments else 0
 
     def get_summary(self):
@@ -59,4 +63,4 @@ class News_details:
 
     def get_categories(self):
         categories = self.select.css("#js-categories a::text").getall()
-        return ([*map(lambda cat: cat.strip(), categories)])
+        return [*map(lambda cat: cat.strip(), categories)]
