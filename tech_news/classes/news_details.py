@@ -32,3 +32,7 @@ class News_details:
     def get_shares_count(self):
         shares = self.select.css(".tec--toolbar__item::text").re_first(r"\d+")
         return int(shares) if shares else 0
+
+    def get_comments_count(self):
+        comments = self.select.css(".comment-count::text").re_first(r"\d+")
+        return int(comments) if comments else 0
