@@ -28,3 +28,7 @@ class News_details:
 
         if writer:
             return writer.strip()
+
+    def get_shares_count(self):
+        shares = self.select.css(".tec--toolbar__item::text").re_first(r"\d+")
+        return int(shares) if shares else 0
