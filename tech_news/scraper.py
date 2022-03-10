@@ -1,3 +1,4 @@
+from pprint import pprint
 import time
 import requests
 from parsel import Selector
@@ -41,18 +42,20 @@ def scrape_noticia(html_content):
     news_details = News_details(html_content)
 
     return {
-        "writer": news_details.get_writer()
+        "title": news_details.get_title(),
+        "timestamp": news_details.get_timestamp(),
+        "writer": news_details.get_writer(),
     }
 
 
-# file_pixel = "tests/assets/tecmundo_pages/dispositivos-moveis|215327-pixel-5a-tera-lancamento-limitado-devido-escassez-chips.htm.html"
-# file_viloes = "tests/assets/tecmundo_pages/minha-serie|215168-10-viloes-animes-extremamente-inteligentes.htm.html"
-# file_seg = "tests/assets/tecmundo_pages/seguranca|215274-pmes-principais-alvos-ataques-ciberneticos.htm.html"
+file_pixel = "tests/assets/tecmundo_pages/dispositivos-moveis|215327-pixel-5a-tera-lancamento-limitado-devido-escassez-chips.htm.html"
+file_viloes = "tests/assets/tecmundo_pages/minha-serie|215168-10-viloes-animes-extremamente-inteligentes.htm.html"
+file_seg = "tests/assets/tecmundo_pages/seguranca|215274-pmes-principais-alvos-ataques-ciberneticos.htm.html"
 
-# with open(file_viloes) as file:
-#     read_file = file.read()
+with open(file_viloes) as file:
+    read_file = file.read()
 
-# scrape_noticia(read_file)
+pprint(scrape_noticia(read_file))
 
 
 # Requisito 5
