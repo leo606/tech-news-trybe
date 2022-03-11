@@ -64,6 +64,7 @@ def scrape_noticia(html_content):
 
 # Requisito 5
 def get_tech_news(amount):
+    amount = int(amount)
     html_content = fetch("https://www.tecmundo.com.br/novidades")
     news_urls = scrape_novidades(html_content)
 
