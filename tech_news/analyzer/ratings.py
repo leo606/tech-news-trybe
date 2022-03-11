@@ -18,8 +18,6 @@ def top_5_news():
     return [(item["title"], item["url"]) for item in news_list]
 
 
-
-
 # Requisito 11
 def top_5_categories():
     categories_list = db.news.aggregate(
