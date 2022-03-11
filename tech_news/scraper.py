@@ -69,7 +69,6 @@ def get_tech_news(amount):
     news_urls = scrape_novidades(html_content)
 
     while len(news_urls) < amount:
-        print("while")
         new_page_url = scrape_next_page_link(html_content)
         html_content = fetch(new_page_url)
         news_urls = news_urls + scrape_novidades(html_content)

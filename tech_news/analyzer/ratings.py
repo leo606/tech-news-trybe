@@ -1,4 +1,3 @@
-from pprint import pprint
 from tech_news.database import db
 
 
@@ -19,7 +18,6 @@ def top_5_news():
     return [(item["title"], item["url"]) for item in news_list]
 
 
-pprint(top_5_news())
 
 
 # Requisito 11
