@@ -24,4 +24,12 @@ pprint(top_5_news())
 
 # Requisito 11
 def top_5_categories():
-    """Seu código deve vir aqui"""
+    categories_list = db.news.aggregate(
+        [
+            {"$unwind": {"path": "$categories"}},
+            {"$group": {"_id": "$categories", "count_cat": {"$sum": 1}}},
+            {"$sort": {"_id": 1}},
+            {"$limit": 5},
+        ]
+    )
+    return [cat["_id"] for cat in categories_list]
