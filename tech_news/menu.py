@@ -8,7 +8,6 @@ from tech_news.analyzer.search_engine import (
     search_by_category,
 )
 
-# Requisito 12
 input_options_text = """Selecione uma das opções a seguir:
  0 - Popular o banco com notícias;
  1 - Buscar notícias por título;
@@ -19,17 +18,53 @@ input_options_text = """Selecione uma das opções a seguir:
  6 - Listar top 5 categorias;
  7 - Sair."""
 
-second_input_actions = {
-    "0": ("Digite quantas notícias serão buscadas:", get_tech_news),
-    "1": ("Digite o título:", search_by_title),
-    "2": ("Digite a data no formato aaaa-mm-dd:", search_by_date),
-    "3": ("Digite a fonte:", search_by_source),
-    "4": ("Digite a categoria:", search_by_category),
-}
 
-top_lists_actions = {
-    "5": top_5_news,
-    "6": top_5_categories,
+def option_zero():
+    value = input("Digite quantas notícias serão buscadas:")
+    return get_tech_news(value)
+
+
+def option_one():
+    value = input("titulo")
+    return search_by_title(value)
+
+
+def option_two():
+    value = input("Digite a data no formato aaaa-mm-dd:")
+    return search_by_date(value)
+
+
+def option_three():
+    value = input("Digite a fonte:")
+    return search_by_source(value)
+
+
+def option_four():
+    value = input("Digite a categoria:")
+    return search_by_category(value)
+
+
+def option_five():
+    return top_5_news()
+
+
+def option_six():
+    return top_5_categories()
+
+
+def option_seven():
+    return print("Encerrando script\n")
+
+
+second_input_actions = {
+    "0": option_zero,
+    "1": option_one,
+    "2": option_two,
+    "3": option_three,
+    "4": option_four,
+    "5": option_five,
+    "6": option_six,
+    "7": option_seven,
 }
 
 
@@ -38,12 +73,5 @@ def analyzer_menu():
     if option not in [str(n) for n in range(8)]:
         return print("Opção inválida", file=sys.stderr)
 
-    if option == "7":
-        return print("Encerrando script\n")
-
     if option in second_input_actions.keys():
-        value = input(second_input_actions[option][0])
-        response = second_input_actions[option][1](value)
-        print(response, file=sys.stdout)
-    elif option in top_lists_actions.keys():
-        print(top_lists_actions[option])
+        return second_input_actions[option]()
