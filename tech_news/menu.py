@@ -73,5 +73,7 @@ def analyzer_menu():
     if option not in [str(n) for n in range(8)]:
         return print("Opção inválida", file=sys.stderr)
 
-    if option in second_input_actions.keys():
-        return second_input_actions[option]()
+    try:
+        second_input_actions[option]()
+    except Exception as err:
+        print(err, file=sys.stderr)
