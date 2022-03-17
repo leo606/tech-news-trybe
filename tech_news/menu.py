@@ -56,7 +56,7 @@ def option_seven():
     return print("Encerrando script\n")
 
 
-second_input_actions = {
+input_actions = {
     "0": option_zero,
     "1": option_one,
     "2": option_two,
@@ -74,6 +74,6 @@ def analyzer_menu():
         return print("Opção inválida", file=sys.stderr)
 
     try:
-        second_input_actions[option]()
+        input_actions[option]()
     except Exception as err:
         print(err, file=sys.stderr)
